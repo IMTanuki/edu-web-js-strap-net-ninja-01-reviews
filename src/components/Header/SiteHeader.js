@@ -12,7 +12,7 @@ import {Link} from 'react-router-dom'
 const SiteHeader = () => {
 	return (
 		<div className = "site-header">
-			<Link to="/">Task Management Tool Reviews</Link>
+			<Link className = "link" to="/">Task Management Tool Reviews</Link>
 		</div>
 	);
 };

@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SiteHeader from './components/Header/SiteHeader';
 import Home from './pages/Home/Home';
 import ReviewDetails from './pages/ReviewDetails/ReviewDetails';
-import Category from './pages/Category/Category';
+import Categories from './pages/Categories/Categories';
 
 // function
 function App () {
@@ -19,9 +19,9 @@ function App () {
           <SiteHeader/>
           <div className="">
             <Routes>
-              <Route path='/' element={ <Home/> }></Route>
+              <Route exact path='/' element={ <Home/> }></Route>
               <Route path="/review-details/:id" element={ <ReviewDetails/> }></Route>
-              <Route path="/category/:id" element={ <Category/> }></Route>
+              <Route path="/categories/:id" element={ <Categories/> }></Route>
             </Routes>
           </div>
         </div>

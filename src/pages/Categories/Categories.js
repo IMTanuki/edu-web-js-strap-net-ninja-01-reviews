@@ -8,12 +8,12 @@ import React from 'react';
 // import - components
 
 // functions
-const Category = () => {
+const Categories = () => {
 	return (
 		<div>
-			<h2>HOME PAGE</h2>
+			<h2>CATEGORIES</h2>
 		</div>
 	);
 };
 
-export default Category;
+export default Categories;
