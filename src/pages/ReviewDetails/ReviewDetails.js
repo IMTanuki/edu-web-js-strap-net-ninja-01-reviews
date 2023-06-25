@@ -10,7 +10,7 @@ import { useQuery, gql } from "@apollo/client";
 
 // import - components
 
-// gql query
+
 //gql query
 const getReviewSelected = gql`
 query getReview($id: ID!) {
@@ -18,7 +18,15 @@ query getReview($id: ID!) {
     data {
       id,
       attributes{
-      	title, rating, body, createdAt, updatedAt, publishedAt
+      	title, rating, body, createdAt, updatedAt, publishedAt,
+      	              categories {
+                data {
+                id,
+                  attributes {
+                    name
+                  }
+                }
+              }
       }
     }
   }
@@ -37,15 +45,22 @@ const ReviewDetails = () => {
 
 	if ( loading ) return <p>Loading...</p>
 	if ( error ) return <p>Error - {error.message}</p>
+
 	const review = data.review.data;
 	return (
 		<div>
-			<h2>REVIEW DETAILS</h2>
+			<h3>Review Details</h3>
 
 			<div className="review-card">
 				<div className="rating">{ review.attributes.rating }</div>
-				<h2 >{ review.attributes.title }</h2>
-				<small> console list</small>
+				<h3 >{ review.attributes.title }</h3>
+
+				{/*  category list */}
+				{review.attributes.categories.data.map ( category => (
+						<small key= {category.id} >{category.attributes.name}</small>
+					)
+				)}
+				
 				<p >{review.attributes.body}</p>
 				<br></br>
 

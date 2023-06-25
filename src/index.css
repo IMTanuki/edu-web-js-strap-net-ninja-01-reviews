@@ -8,6 +8,19 @@ body {
 h1,h2,h3,h4 {
   font-weight: 500;
 }
+h2 {
+  font-size: 2rem;
+  color: #8e2ad6;
+}
+
+h3 {
+  font-size: 1.5rem;
+  color: #8e2ad6;
+}
+h4 {
+  font-size: 1.25rem;
+}
+
 .App {
   font-size: 1.2em;
   margin: 10px auto;
@@ -22,10 +35,20 @@ a {
   border-bottom: 1px dotted;
 }
 .site-header {
-  font-size: 2rem;
-  color: #8e2ad6;
   padding-bottom: 10px;
-  border-bottom: 2px solid;
+  border-bottom: 2px solid #8e2ad6;
+}
+.site-header .categories {
+  color: #8e2ad6;
+  text-align: right;
+}
+.site-header .categories a {
+  margin-left: 10px;
+}
+
+.site-header .title {
+  font-size: 2rem;
+  font-weight: 500;
 }
 
 .link {

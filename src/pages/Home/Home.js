@@ -17,7 +17,15 @@ query {
     data {
       id,
       attributes{
-      	title, rating, body, createdAt, updatedAt,  publishedAt
+      	title, rating, body, createdAt, updatedAt,  publishedAt,
+      	              categories {
+                data {
+                id,
+                  attributes {
+                    name
+                  }
+                }
+              }
       }
     }
   }
@@ -30,20 +38,27 @@ const Home = () => {
 	const { data, loading, error } = useQuery ( getReviewsAll );
 
 	if ( loading ) return <p>Loading...</p>
-	if ( error ) return <p>{error.message}</p>
+	if ( error ) return <p>{ error.message }</p>
 
 	return (
 
 		<div>
-			<h2>HOME PAGE</h2>
+			<h2>Home</h2>
 			<div>
-				{ data && data.reviews.data.map((review) => {
+				{ data && data.reviews.data.map ( ( review ) => {
 						return (
 							<div key={ review.id } className="review-card">
 
 								<div className="rating">{ review.attributes.rating }</div>
 								<h2>{ review.attributes.title }</h2>
-								<small> console list</small>
+
+								{/*  category list */}
+								{review.attributes.categories.data.map ( category => (
+										<small key= {category.id} >{category.attributes.name}</small>
+									)
+								)}
+
+
 								<p>{ review.attributes.body.substr ( 0, 500 ) }...</p>
 								<br></br>
 								<Link to={ `/review-details/${ review.id }` }>Read More...</Link>
