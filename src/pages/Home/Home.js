@@ -11,7 +11,7 @@ import { useQuery, gql } from "@apollo/client";
 // import - components
 
 //gql query
-const gqlReviews = gql`
+const getReviewsAll = gql`
 query {
   reviews {
     data {
@@ -27,7 +27,7 @@ query {
 // functions
 const Home = () => {
 	// const { data, loading, err } = useFetch ( 'http://localhost:5000/api/reviews' );
-	const { data, loading, error } = useQuery ( gqlReviews );
+	const { data, loading, error } = useQuery ( getReviewsAll );
 
 	if ( loading ) return <p>Loading...</p>
 	if ( error ) return <p>{error.message}</p>
