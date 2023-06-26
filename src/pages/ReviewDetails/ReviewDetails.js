@@ -1,6 +1,7 @@
 // import - modules
 import React from 'react';
 import {useParams } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 
 // import - react hooks
 import { useQuery, gql } from "@apollo/client";
@@ -60,8 +61,8 @@ const ReviewDetails = () => {
 						<small key= {category.id} >{category.attributes.name}</small>
 					)
 				)}
-				
-				<p >{review.attributes.body}</p>
+
+				<ReactMarkdown>{review.attributes.body}</ReactMarkdown>
 				<br></br>
 
 			</div>

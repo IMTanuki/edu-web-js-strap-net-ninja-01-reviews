@@ -1,6 +1,8 @@
 // import - modules
 import { React } from 'react';
 import { Link } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
+
 
 // import - react hooks
 import { useQuery, gql } from "@apollo/client";
@@ -59,7 +61,8 @@ const Home = () => {
 								)}
 
 
-								<p>{ review.attributes.body.substr ( 0, 500 ) }...</p>
+								<ReactMarkdown>{review.attributes.body.substr(0, 500)}</ReactMarkdown>
+
 								<br></br>
 								<Link to={ `/review-details/${ review.id }` }>Read More...</Link>
 							</div>
