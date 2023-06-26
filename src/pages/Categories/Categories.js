@@ -1,10 +1,11 @@
 // import - modules
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
+import { useParams } from 'react-router-dom';
 
 // import - react hooks
 import { useQuery, gql } from "@apollo/client";
+import ReviewCard from "../../components/Reviews/ReviewCard";
+import StatusMessage from "../../components/Other/StatusMessage";
 
 // import - custom hooks
 
@@ -50,35 +51,19 @@ const Categories = () => {
 		}
 	} );
 
-	if ( loading ) return <p>Loading...</p>
-	if ( error ) return <p>Error - { error.message }</p>
+	if (loading || error) {
+		return <StatusMessage loading={loading} error={error} />;
+	}
 
 	const category = data.category.data;
-	console.log ( category.attributes.reviews.data );
-	console.log ( 'test' );
-
 
 	return (
 		<div>
-			<h2>Categories</h2>
 			<h3>{ category.attributes.name }</h3>
 
+			{/* all reviews for selected category */}
 			{ category.attributes.reviews.data.map ( review => (
-				<div key={ review.id } className="review-card">
-					<div className="rating">{ review.attributes.rating }</div>
-					<h3>{ review.attributes.title }</h3>
-
-					{/*  category list */}
-					{review.attributes.categories.data.map ( category => (
-						<small key= {category.id} >{category.attributes.name}</small>
-						)
-					)}
-
-
-					<ReactMarkdown>{review.attributes.body.substr(0, 500)}</ReactMarkdown>
-					<Link to={`/review-details/${review.id}` }>Read More...</Link>
-
-				</div>
+				<ReviewCard review={ review } hasLink={ true }> </ReviewCard>
 			) ) }
 		</div>
 	);

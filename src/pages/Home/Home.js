@@ -1,16 +1,16 @@
 // import - modules
 import { React } from 'react';
-import { Link } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
-
 
 // import - react hooks
 import { useQuery, gql } from "@apollo/client";
+import ReviewCard from "../../components/Reviews/ReviewCard";
+
 
 // import - custom hooks
 // import useFetch from '../../hooks/useFetch';
 
 // import - components
+import StatusMessage from "../../components/Other/StatusMessage";
 
 //gql query
 const getReviewsAll = gql`
@@ -39,33 +39,19 @@ const Home = () => {
 	// const { data, loading, err } = useFetch ( 'http://localhost:5000/api/reviews' );
 	const { data, loading, error } = useQuery ( getReviewsAll );
 
-	if ( loading ) return <p>Loading...</p>
-	if ( error ) return <p>{ error.message }</p>
+	if ( loading || error ) {
+		return <StatusMessage loading={ loading } error={ error }/>;
+	}
 
 	return (
-
 		<div>
 			<h2>Home</h2>
+
+			{/* all reviews */}
 			<div>
 				{ data && data.reviews.data.map ( ( review ) => {
 						return (
-							<div key={ review.id } className="review-card">
-
-								<div className="rating">{ review.attributes.rating }</div>
-								<h2>{ review.attributes.title }</h2>
-
-								{/*  category list */}
-								{review.attributes.categories.data.map ( category => (
-										<small key= {category.id} >{category.attributes.name}</small>
-									)
-								)}
-
-
-								<ReactMarkdown>{review.attributes.body.substr(0, 500)}</ReactMarkdown>
-
-								<br></br>
-								<Link to={ `/review-details/${ review.id }` }>Read More...</Link>
-							</div>
+							<ReviewCard review={ review } hasLink={ true }> </ReviewCard>
 						)
 					}
 				) }
