@@ -1,55 +1,33 @@
-// import - modules
+// import - react modules
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
 // import - react hooks
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import ReviewCard from "../../components/Reviews/ReviewCard";
 import StatusMessage from "../../components/Other/StatusMessage";
 
+// import - custom modules
+import { GET_REVIEWS_SELECTED } from "../../data/queries/queriesReviews";
+
 // import - custom hooks
-// import useFetch from '../../hooks/useFetch';
 
 // import - components
-
-
-//gql query
-const getReviewSelected = gql`
-query getReview($id: ID!) {
-  review(id: $id) {
-    data {
-      id,
-      attributes{
-      	title, rating, body, createdAt, updatedAt, publishedAt,
-      	              categories {
-                data {
-                id,
-                  attributes {
-                    name
-                  }
-                }
-              }
-      }
-    }
-  }
-}
-`;
 
 // functions
 const ReviewDetails = () => {
 	const { id } = useParams ();
-	// const { data: review,  loading, err } = useFetch ( 'http://localhost:5000/api/reviews/' + id );
-	const { data, loading, error } = useQuery ( getReviewSelected, {
+	const { data, loading, error } = useQuery ( GET_REVIEWS_SELECTED, {
 		variables: {
-			id: id
+			id:id
 		}
 	} );
 
-	if (loading || error) {
-		return <StatusMessage loading={loading} error={error} />;
-	}
+	// check status
+	if (loading || error) return <StatusMessage loading={loading} error={error} />;
 
-	const review = data.review.data;
+	// deconstruct data
+	const review = data.review;
 
 	return (
 		<div>

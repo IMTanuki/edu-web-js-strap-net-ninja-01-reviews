@@ -10,16 +10,16 @@ import { Link } from "react-router-dom";
 // import - components
 
 const  ReviewCard = (props) => {
+	// deconstruct props
 	const review = props.review;
 	const hasLink = props.hasLink;
 
   return (
-
 	  <div className="review-card">
 		  <div className="rating">{ review.rating }</div>
 		  <h3 >{ review.title }</h3>
 
-		  {/*  category list */}
+		  {/*  all categories within the review */}
 		  {review.categories.map ( category => (
 				  <small key= {category.id} >{category.name}</small>
 			  )

@@ -1,31 +1,20 @@
-// import - modules
+// import - react modules
 import React from 'react';
 import { Link } from 'react-router-dom'
 
 // import - react hooks
+import { useQuery } from "@apollo/client";
 
-// import - react hooks
-import { useQuery, gql } from "@apollo/client";
+// import - custom modules
+import { GET_CATEGORIES_ALL } from "../../data/queries/queriesCategories";
+
+// import - custom hooks
 
 // import - components
 
-//gql query
-const getCategoriesAll = gql`
-query {
-  categories {
-    data {
-      id,
-      attributes{
-      	name, createdAt, updatedAt,  publishedAt
-      }
-    }
-  }
-}
-`
-
 // functions
 const SiteHeader = () => {
-	const { data, loading, error } = useQuery ( getCategoriesAll );
+	const { data, loading, error } = useQuery ( GET_CATEGORIES_ALL);
 
 	if ( loading ) return <p>Loading...</p>
 	if ( error ) return <p>Error: { error.message }</p>
@@ -37,10 +26,10 @@ const SiteHeader = () => {
 			</Link>
 			<nav className = "categories">
 				<span className="">Category:</span>
-				{ data && data.categories.data.map ( ( category ) => {
+				{ data && data.categories.map ( ( category ) => {
 					return (
 						<Link key={ category.id } to={ `/category/${ category.id }` }>
-							{category.attributes.name}
+							{category.name}
 						</Link>
 					)
 				} )
