@@ -14,25 +14,20 @@ import StatusMessage from "../../components/Other/StatusMessage";
 
 //gql query
 const getReviewsAll = gql`
-query {
-  reviews {
-    data {
-      id,
-      attributes{
-      	title, rating, body, createdAt, updatedAt,  publishedAt,
-      	              categories {
-                data {
-                id,
-                  attributes {
-                    name
-                  }
-                }
-              }
+  query getReviewsAll {
+    reviews {
+      id
+      title
+      rating
+      body
+      categories {
+        id
+        name
       }
     }
   }
-}
-`
+`;
+
 
 // functions
 const Home = () => {
@@ -49,9 +44,9 @@ const Home = () => {
 
 			{/* all reviews */}
 			<div>
-				{ data && data.reviews.data.map ( ( review ) => {
+				{ data && data.reviews.map ( ( review ) => {
 						return (
-							<ReviewCard review={ review } hasLink={ true }> </ReviewCard>
+							<ReviewCard key={review.id} review={ review } hasLink={ true }> </ReviewCard>
 						)
 					}
 				) }

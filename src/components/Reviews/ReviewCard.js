@@ -16,16 +16,16 @@ const  ReviewCard = (props) => {
   return (
 
 	  <div className="review-card">
-		  <div className="rating">{ review.attributes.rating }</div>
-		  <h3 >{ review.attributes.title }</h3>
+		  <div className="rating">{ review.rating }</div>
+		  <h3 >{ review.title }</h3>
 
 		  {/*  category list */}
-		  {review.attributes.categories.data.map ( category => (
-				  <small key= {category.id} >{category.attributes.name}</small>
+		  {review.categories.map ( category => (
+				  <small key= {category.id} >{category.name}</small>
 			  )
 		  )}
 
-		  <ReactMarkdown>{review.attributes.body}</ReactMarkdown>
+		  <ReactMarkdown>{review.body}</ReactMarkdown>
 		  <br></br>
 
 		  {hasLink && <Link to={`/review-details/${review.id}`}>Read More</Link>}
