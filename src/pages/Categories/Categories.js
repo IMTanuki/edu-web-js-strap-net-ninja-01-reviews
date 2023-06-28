@@ -37,7 +37,11 @@ const Categories = () => {
 
 			{/* all reviews with category */}
 			{ 	reviews && reviews.map ( review => (
-				<ReviewCard key={review.id} review={review} hasLink={true} />
+				<ReviewCard key={review.id}
+							review={review}
+							hasLink={true}
+							bodyLength={500} >
+				</ReviewCard>
 			) ) }
 		</div>
 	);

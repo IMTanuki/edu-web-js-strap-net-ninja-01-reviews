@@ -13,10 +13,6 @@ import { GET_REVIEWS_ALL } from '../../data/queries/queriesReviews';
 // import - custom components
 import StatusMessage from "../../components/Other/StatusMessage";
 
-//gql query
-
-
-
 // functions
 const Home = () => {
 	// const { data, loading, err } = useFetch ( 'http://localhost:5000/api/reviews' );
@@ -36,7 +32,11 @@ const Home = () => {
 			<div>
 				{ reviews && reviews.map ( ( review ) => {
 						return (
-							<ReviewCard key={review.id} review={ review } hasLink={ true }> </ReviewCard>
+							<ReviewCard key={review.id}
+										review={ review }
+										hasLink={ true }
+										bodyLength = {500}>
+							</ReviewCard>
 						)
 					}
 				) }

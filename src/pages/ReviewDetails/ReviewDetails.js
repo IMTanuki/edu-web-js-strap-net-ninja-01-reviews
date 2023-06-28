@@ -34,7 +34,11 @@ const ReviewDetails = () => {
 			<h2>Selected Review</h2>
 
 			{/* selected review */}
-			<ReviewCard review={ review } hasLink={ false }> </ReviewCard>
+			<ReviewCard
+						review={ review }
+						hasLink={ false }
+						bodyLength = {99999}>
+			</ReviewCard>
 
 		</div>
 	);
